@@ -27,6 +27,7 @@ export const connectToDatabase = async () => {
       dbName: "my-blog",
       bufferCommands: false,
     });
+  console.log("database connection established");
 
   cached.conn = await cached.promise;
 

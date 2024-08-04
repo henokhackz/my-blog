@@ -1,32 +1,41 @@
-import mongoose, { model, models, Schema } from "mongoose";
+import { Schema, model, models } from "mongoose";
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   clerkId: {
     type: String,
     required: true,
     unique: true,
-  },
-  name: {
-    type: String,
-    required: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
   },
-  created_at: {
-    type: Date,
-    default: Date.now,
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
-  updated_at: {
-    type: Date,
-    default: Date.now,
+  photo: {
+    type: String,
+    required: true,
   },
-  blogs: [{ type: mongoose.Schema.ObjectId, ref: "Blog" }],
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  planId: {
+    type: Number,
+    default: 1,
+  },
+  creditBalance: {
+    type: Number,
+    default: 10,
+  },
 });
 
-// Check if the User model is already defined, otherwise define it
-const User = models.User || model("User", userSchema);
+const User = models?.User || model("User", UserSchema);
 
 export default User;
