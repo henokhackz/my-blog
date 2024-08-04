@@ -47,37 +47,30 @@ export async function POST(req: Request) {
   }
 
   // Process the event
-  const { id } = evt.data;
   const eventType = evt.type;
 
   if (eventType === "user.created") {
+    const { id, email_addresses, image_url, first_name, last_name, username } =
+      evt.data;
     try {
       // Extract user data from the event
-      const newUser = {
-        clerkId: evt.data.id,
-        name: evt.data.first_name,
-        email: evt.data.primary_email_address_id,
-        password: evt.data.id,
-        profileImgUrl: evt.data.image_url,
+      const user = {
+        clerkId: id,
+        email: email_addresses[0]?.email_address,
+        username: username!,
+        firstName: first_name,
+        lastName: last_name,
+        photo: image_url,
       };
 
       // Create the user
-      await createUser({
-        clerkId: newUser.clerkId,
-        name: newUser.name,
-        email: newUser.email,
-        profileImgUrl: newUser.profileImgUrl,
-      });
+      const newUser = await createUser(user);
+      console.log("User created successfully:", newUser);
     } catch (error) {
       console.error("Error creating user:", error);
-      return new Response("Error occurred while creating user", {
-        status: 500,
-      });
+      return new Response("Could not create user", { status: 500 });
     }
   }
-
-  console.log(`Webhook with ID ${id} and type ${eventType}`);
-  console.log("Webhook body:", body);
 
   return new Response("", { status: 200 });
 }

@@ -1,30 +1,20 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import User from "../database/models/User.model";
+import { connectToDatabase } from "../database/mongoose";
 
-interface UserData {
-  clerkId: string;
-  name: string | null;
-  email: string | null;
-  profileImgUrl: string;
-}
-
-export async function createUser({
-  clerkId,
-  name,
-  email,
-  profileImgUrl,
-}: UserData) {
+// CREATE
+export async function createUser(user: CreateUserParams) {
   try {
-    const newUser = await User.create({
-      clerkId,
-      name,
-      email,
-      profileImgUrl,
-    });
-    return newUser;
+    await connectToDatabase();
+
+    const newUser = await User.create(user);
+
+    return JSON.parse(JSON.stringify(newUser));
   } catch (error) {
-    console.error("Error creating user:", error);
-    throw new Error("Error creating user");
+    console.error(error);
+    throw new Error("Could not connect to database");
   }
 }
