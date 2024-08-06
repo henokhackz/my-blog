@@ -23,9 +23,6 @@ type Props = {
 };
 
 const Toolbar = ({ editor, content }: Props) => {
-  if (!editor) {
-    return null;
-  }
   const addImage = useCallback(() => {
     const url = window.prompt("URL");
 
@@ -37,6 +34,7 @@ const Toolbar = ({ editor, content }: Props) => {
   if (!editor) {
     return null;
   }
+
   return (
     <div
       className="px-4 py-3 rounded-tl-md rounded-tr-md flex justify-between items-start
