@@ -7,13 +7,16 @@ import {
 } from "@clerk/nextjs";
 import MobileNav from "./MobileNav";
 import { Button } from "../button";
+import Image from "next/image";
 
 const Header = () => {
   return (
-    <header className="flex items-center justify-between w-full px-4 py-5 shadow-sm shadow-slate-400/40 ">
-      <div className="flex items-center gap-5">
+    <header className="flex items-center justify-between w-full  py-5 pr-4  bg-slate-950 pl-2 md:pl-0 shadow-sm border border-l-transparent border-slate-600/40  shadow-slate-300">
+      <div className="flex items-center justify-start md:justify-center w-[250px] ">
         <MobileNav />
-        <h1 className="text-xl font-bold text-gray-800">My App</h1>
+        <h2 className="text-2xl text-white leading-10 tracking-widest hidden md:block">
+          MY BlOG
+        </h2>
       </div>
       <div className="flex items-center gap-5">
         <SignedIn>

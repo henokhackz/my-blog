@@ -84,3 +84,11 @@ declare type BlogProps = {
   isEditing: boolean;
   setIsEditing?: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export interface Blog {
+  id: number;
+  title: string;
+  description: string;
+  author: string;
+  date: string;
+  link: string;
+}

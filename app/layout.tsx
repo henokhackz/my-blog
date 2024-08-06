@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { dark } from "@clerk/themes";
+import Footer from "@/components/ui/shared/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,12 +45,15 @@ export default function RootLayout({
         >
           <ClerkLoaded>
             <Header />
-            <div className="flex w-full">
-              <SignedIn>
-                <Sidebar />
-              </SignedIn>
-              <main className="flex-1 p-4">{children}</main>
+            <div className="flex  w-full ">
+              <div className="flex md:w-[200px]">
+                <SignedIn>
+                  <Sidebar />
+                </SignedIn>
+              </div>
+              <main className="flex-1">{children}</main>
             </div>
+            <Footer />
           </ClerkLoaded>
         </body>
       </html>
